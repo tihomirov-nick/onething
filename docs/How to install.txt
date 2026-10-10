@@ -1,0 +1,66 @@
+ONE THING
+=========
+
+INSTALLING
+Open One Thing right from this window. It moves itself to the Applications
+folder and restarts from there. Without administrator rights, One Thing goes
+to the Applications folder inside your home folder. Once it runs, its icon
+appears in the menu bar at the top right of the screen.
+
+You can also install One Thing by hand. Drag its icon onto the Applications
+folder next to it and launch One Thing from the Applications folder.
+
+IF macOS WON'T OPEN THE APP
+The app isn't notarized by Apple, so on the first launch macOS may show
+a warning ("cannot verify the developer" or "Apple could not verify it is free
+of malware"). You only need to allow it once.
+
+  • On macOS 15 and later, close the warning with "Done", open System
+    Settings, go to Privacy & Security, scroll down, click "Open Anyway"
+    next to One Thing and confirm.
+
+  • On macOS 14, right-click One Thing in Finder, choose "Open", then click
+    "Open" again in the warning.
+
+  • If that didn't help, drag One Thing onto the Applications folder, open
+    Terminal and run:
+        xattr -dr com.apple.quarantine "/Applications/One Thing.app"
+
+THE PHRASE IN THE MENU BAR
+One Thing shows one phrase in the menu bar: the main thing for today. While
+there is no phrase, a small mark, an opening quotation mark, stands in its
+place. A click on the icon or the phrase opens a panel with a field. Return
+saves the phrase, Esc closes the panel without changes. An empty phrase brings
+the mark back. A right click or a Control-click opens the menu: settings,
+checking for updates, About and Quit.
+
+PHRASE SETTINGS
+In Settings (⌘,), in the "Phrase" section, you can set the maximum width of
+the text in the menu bar, hide the text and keep only the mark, choose a font
+and its style, and record a shortcut for editing. A long phrase is cut with an
+ellipsis, the whole phrase shows in the tooltip of the icon. Any installed font
+will do: the list has a search field, and the field in the panel shows the
+phrase in the same font. If the font disappears from the Mac, One Thing goes
+back to the system font. The shortcut opens the field from any app. At first
+there is none: click "Not set", press a shortcut, Esc cancels, ⌫ removes it.
+
+LANGUAGE
+One Thing works in Russian and English. In Settings (⌘,) choose "Same as
+System", "Русский" or "English". With "Same as System" One Thing takes the
+first suitable language from the list in System Settings > General >
+Language & Region. A new language takes effect after a restart, and the
+"Restart" button appears right under the choice.
+
+UPDATES
+One Thing looks for a new version on GitHub at launch, every three hours and
+after the Mac wakes up. It downloads a new version by itself, checks its
+signature and installs it when One Thing is idle. With "Install updates
+automatically" turned off in Settings, the icon gets a dot instead, and
+One Thing's panel shows a card with "Later" and "Update".
+
+OPEN AT LOGIN
+One Thing opens at login to install updates on time. To stop it, turn off
+"Open at login" in Settings.
+
+REQUIREMENTS
+macOS 14 or later, a Mac with Apple Silicon or Intel.
