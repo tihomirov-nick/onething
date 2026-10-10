@@ -18,7 +18,7 @@ APP_NAME="OneThing"          # the product and the executable
 # app into Applications under "<CFBundleName>.app".
 DISPLAY_NAME="One Thing"
 BUNDLE_ID="${BUNDLE_ID:-com.onething.app}"
-VERSION="${VERSION:-1.0.1}"
+VERSION="${VERSION:-1.0.2}"
 BUILD_NUMBER="${BUILD_NUMBER:-$(date +%Y%m%d%H%M)}"
 ARCHS="${ARCHS:-arm64 x86_64}"
 CERT_SHA1="AF82036140843A7D76497EA8E4CD23403C8AEDC2"
