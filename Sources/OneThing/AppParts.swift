@@ -11,7 +11,7 @@ import OneThingCore
 
 extension MenuBarIcon {
     /// The mark in the menu bar, shown while there is no phrase (or the text is hidden): an opening double quotation mark,
-    /// two solid shapes (OneThing.swift, with the conventions of Glyph.swift), 20 pt tall on the 22 pt canvas.
+    /// two solid shapes (OneThing.swift, with the conventions of Glyph.swift), 20 pt wide and 15 pt tall on the 22 pt canvas.
     /// scripts/make_icon.swift draws the same mark on the app icon. The mark places itself in the canvas of the image, so
     /// `box` stays unused.
     static func drawGlyph(in ctx: CGContext, box: CGRect) {

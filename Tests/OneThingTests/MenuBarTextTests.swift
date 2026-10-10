@@ -57,12 +57,11 @@ final class MenuBarTextTests: XCTestCase {
         }
     }
 
-    /// The baseline of the menu bar font is the one AppKit gives a native title: a plain button, as the status item's
-    /// button is, with the title set in the menu bar font.
-    func testTheBaselineIsTheOneOfANativeTitle() throws {
-        let height = MenuBarText.height
+    /// A plain button, as the status item's button is, with `title` set in the menu bar font, drawn at 2x: what AppKit
+    /// itself makes of a native title.
+    private func nativeTitle(_ title: String, height: CGFloat) throws -> NSBitmapImageRep {
         let button = NSButton(frame: NSRect(x: 0, y: 0, width: 60, height: height))
-        button.title = "H"
+        button.title = title
         button.isBordered = false
         button.font = NSFont.menuBarFont(ofSize: 0)
         button.alignment = .center
@@ -73,9 +72,33 @@ final class MenuBarTextTests: XCTestCase {
         button.layoutSubtreeIfNeeded()
         let rep = try XCTUnwrap(button.bitmapImageRepForCachingDisplay(in: button.bounds))
         button.cacheDisplay(in: button.bounds, to: rep)
+        return rep
+    }
+
+    /// The baseline of the menu bar font is the one AppKit gives a native title: a plain button, as the status item's
+    /// button is, with the title set in the menu bar font.
+    func testTheBaselineIsTheOneOfANativeTitle() throws {
+        let height = MenuBarText.height
+        let rep = try nativeTitle("H", height: height)
         let ink = try XCTUnwrap(inkRows(rep))
         let native = (CGFloat(rep.pixelsHigh) - CGFloat(ink.bottom + 1)) / (CGFloat(rep.pixelsHigh) / height)
         XCTAssertEqual(native, MenuBarText.baseline(height: height), accuracy: 0.5)
+    }
+
+    /// The phrase is as tall as the system's own menu bar text, the clock's and the menus': the «H» of the item's image
+    /// has the height, the top and the bottom of the «H» of a native title in the menu bar font (13 pt), not a larger one.
+    func testThePhraseIsAsTallAsANativeMenuBarTitle() throws {
+        XCTAssertEqual(PhraseFont.size, NSFont.menuBarFont(ofSize: 0).pointSize)
+        let height = MenuBarText.height
+        let nativeRep = try nativeTitle("H", height: height)
+        let native = try XCTUnwrap(inkRows(nativeRep))
+        let ours = try XCTUnwrap(inkRows(bitmap(MenuBarText.image("H", font: system), size: NSSize(width: 20, height: height))))
+        let nativeScale = CGFloat(nativeRep.pixelsHigh) / height
+        // The same number of pixel rows, within the one row that the two bitmaps' scales (the button's own) may add.
+        XCTAssertEqual(CGFloat(ours.bottom - ours.top + 1) / scale, CGFloat(native.bottom - native.top + 1) / nativeScale, accuracy: 0.5)
+        XCTAssertEqual(CGFloat(ours.top) / scale, CGFloat(native.top) / nativeScale, accuracy: 0.5)
+        // 13 pt type: the capital «H» is 9.2 pt tall.
+        XCTAssertEqual(CGFloat(ours.bottom - ours.top + 1) / scale, NSFont.menuBarFont(ofSize: 0).capHeight, accuracy: 0.6)
     }
 
     // MARK: Drawing
